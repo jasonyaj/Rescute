@@ -28,6 +28,9 @@ public class KeyHandler implements KeyListener{
 		if(code == KeyEvent.VK_D) {
 			rightPressed = true;
 		}
+		if(code == KeyEvent.VK_ESCAPE) {
+			System.exit(0);
+		}
 	}
 
 	@Override

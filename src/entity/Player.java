@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -13,14 +14,24 @@ public class Player extends Entity {
 
 	GamePanel gp;
 	KeyHandler keyH;
+	int hasBunny = 0;
 
 	public Player(GamePanel gp, KeyHandler keyH) {
 
 		this.gp = gp;
 		this.keyH = keyH;
+		
+		solidArea = new Rectangle();
+		solidArea.x = 8; // sideNote: make value into a variable for scalability
+		solidArea.y = 12; // sideNote: make value into a variable for scalability
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
+		solidArea.width = 32; // sideNote: make value into a variable for scalability
+		solidArea.height = 32; // sideNote: make value into a variable for scalability
 
 		setDefaultValues();
 		getPlayerImage();
+		
 
 	}
 
@@ -62,19 +73,40 @@ public class Player extends Entity {
 				|| keyH.rightPressed == true) {
 			if (keyH.upPressed == true) {
 				direction = "up";
-				y -= speed;
 			} else if (keyH.downPressed == true) {
-				direction = "down";
-				y += speed;
+				direction = "down";	
 			} else if (keyH.leftPressed == true) {
 				direction = "left";
-				x -= speed;
 			} else if (keyH.rightPressed == true) {
 				direction = "right";
-				x += speed;
 			}
-
-			// ----- SPRITE IMAGE SWTICH LOGIC -----
+			// CHECK TILE COLLISION
+			collisionOn = false;
+			gp.cChecker.checkTile(this);
+			
+			//CHECK OBJECT COLLISION
+			int objIndex = gp.cChecker.checkObject(this, true); // int because method returns index "1987"
+			pickUpObject(objIndex);
+			
+			// IF COLLISION IS FALSE, PLAYER CAN MOVE
+			if(collisionOn == false) {
+				switch(direction) {
+				case "up":
+					y -= speed;
+					break;
+				case "down":
+					y += speed;
+					break;
+				case "left":
+					x -= speed;
+					break;
+				case "right":
+					x += speed;
+					break;
+				}
+			}
+			
+			// ----- SPRITE IMAGE SWITCH LOGIC -----
 			spriteCounter++; // every frame will increase counter by 1
 			if (spriteCounter > 15) { // counter reaches 11 and this if statement occurs
 				if (spriteNum == 1) {
@@ -87,6 +119,31 @@ public class Player extends Entity {
 
 		}
 
+	}
+	
+	// method to pick up object when collision/intersect event happens
+	public void pickUpObject(int i) {
+		
+		if(i != 1987) {
+			
+			String objectName = gp.obj[i].name;
+			
+			switch(objectName) {
+			case "Bunny":
+				hasBunny++;
+				System.out.println("Bunny: "+hasBunny);
+				gp.obj[i] = null; // this will delete the object when touched
+				break;
+			case "RabbitDen":
+				if(hasBunny > 0) {
+					while(hasBunny > 0) {
+						hasBunny--;						
+					}
+				}
+				System.out.println("Bunny: "+hasBunny);
+				break;
+			}
+		}
 	}
 
 	public void draw(Graphics2D g2) {
