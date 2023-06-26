@@ -14,7 +14,8 @@ public class Player extends Entity {
 
 	GamePanel gp;
 	KeyHandler keyH;
-	int hasBunny = 0;
+	public int hasBunny = 0;
+	public int savedBunny = 2;
 
 	public Player(GamePanel gp, KeyHandler keyH) {
 
@@ -130,15 +131,26 @@ public class Player extends Entity {
 			
 			switch(objectName) {
 			case "Bunny":
+				gp.playSE(1);
 				hasBunny++;
-				System.out.println("Bunny: "+hasBunny);
 				gp.obj[i] = null; // this will delete the object when touched
+				gp.ui.showMessage("Hurry, save the bunny, drop it in the den.");
 				break;
 			case "RabbitDen":
 				if(hasBunny > 0) {
 					while(hasBunny > 0) {
-						hasBunny--;						
+						gp.playSE(3); // ----- FIX ME, so fast, can only here it once, FIX ME ----
+						hasBunny--;
+						savedBunny--;
+						if(savedBunny == 0) {
+							gp.playSE(2);
+							
+						}
 					}
+				}
+				else {
+					gp.ui.showMessage("There is "+savedBunny+" left to save.");
+					
 				}
 				System.out.println("Bunny: "+hasBunny);
 				break;
