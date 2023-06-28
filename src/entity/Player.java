@@ -143,6 +143,8 @@ public class Player extends Entity {
 						hasBunny--;
 						savedBunny--;
 						if(savedBunny == 0) {
+							gp.ui.gameFinished = true;
+							gp.stopMusic();
 							gp.playSE(2);
 							
 						}
@@ -152,7 +154,6 @@ public class Player extends Entity {
 					gp.ui.showMessage("There is "+savedBunny+" left to save.");
 					
 				}
-				System.out.println("Bunny: "+hasBunny);
 				break;
 			}
 		}

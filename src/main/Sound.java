@@ -14,9 +14,16 @@ public class Sound {
 	public Sound() {
 		
 		soundURL[0] = getClass().getResource("/sound/BlueBoyAdventure.wav");
+		// collect bunny SE
 		soundURL[1] = getClass().getResource("/sound/coin.wav");
+		// level completion
 		soundURL[2] = getClass().getResource("/sound/fanfare.wav");
+		// drop bunny in den
 		soundURL[3] = getClass().getResource("/sound/drop.wav");
+		// title screen chosen menu SE
+		soundURL[4] = getClass().getResource("/sound/powerup.wav");
+		// title screen cursor SE
+		soundURL[5] = getClass().getResource("/sound/speak.wav");
 	}
 	//method to open audio files in java
 	public void setFile(int i) {
