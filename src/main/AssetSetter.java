@@ -13,16 +13,61 @@ public class AssetSetter {
 	
 	public void setObject() {
 		
-		gp.obj[0] = new OBJ_Bunny();
-		gp.obj[0].x = 14 * gp.tileSize;
-		gp.obj[0].y = 1 * gp.tileSize;
+		int mapNumber = 0;
+		int i= 0;
 		
-		gp.obj[1] = new OBJ_Bunny();
-		gp.obj[1].x = 9 * gp.tileSize;
-		gp.obj[1].y = 7 * gp.tileSize;
+		// Map 1(tutorial)
+		gp.obj[mapNumber][i] = new OBJ_Bunny(gp);
+		gp.obj[mapNumber][i].x = 14 * gp.tileSize;
+		gp.obj[mapNumber][i].y = 1 * gp.tileSize;
+		i++;
 		
-		gp.obj[2] = new OBJ_RabbitDen();
-		gp.obj[2].x = 2 * gp.tileSize;
-		gp.obj[2].y = 1 * gp.tileSize;
+		gp.obj[mapNumber][i] = new OBJ_Bunny(gp);
+		gp.obj[mapNumber][i].x = 9 * gp.tileSize;
+		gp.obj[mapNumber][i].y = 7 * gp.tileSize;
+		i++;
+		
+		gp.obj[mapNumber][i] = new OBJ_RabbitDen(gp);
+		gp.obj[mapNumber][i].x = 2 * gp.tileSize;
+		gp.obj[mapNumber][i].y = 1 * gp.tileSize;
+		
+		// Map 2
+		mapNumber = 1;
+		
+		gp.obj[mapNumber][i] = new OBJ_Bunny(gp);
+		gp.obj[mapNumber][i].x = 14 * gp.tileSize;
+		gp.obj[mapNumber][i].y = 1 * gp.tileSize;
+		i++;
+		
+		gp.obj[mapNumber][i] = new OBJ_Bunny(gp);
+		gp.obj[mapNumber][i].x = 9 * gp.tileSize;
+		gp.obj[mapNumber][i].y = 7 * gp.tileSize;
+		i++;
+		
+		gp.obj[mapNumber][i] = new OBJ_RabbitDen(gp);
+		gp.obj[mapNumber][i].x = 2 * gp.tileSize;
+		gp.obj[mapNumber][i].y = 1 * gp.tileSize;
+		
+		// Map 3
+		mapNumber = 2;
+		
+		gp.obj[mapNumber][i] = new OBJ_Bunny(gp);
+		gp.obj[mapNumber][i].x = 10 * gp.tileSize;
+		gp.obj[mapNumber][i].y = 1 * gp.tileSize;
+		i++;
+		
+		gp.obj[mapNumber][i] = new OBJ_Bunny(gp);
+		gp.obj[mapNumber][i].x = 7 * gp.tileSize;
+		gp.obj[mapNumber][i].y = 8 * gp.tileSize;
+		i++;
+		
+		gp.obj[mapNumber][i] = new OBJ_Bunny(gp);
+		gp.obj[mapNumber][i].x = 3 * gp.tileSize;
+		gp.obj[mapNumber][i].y = 3 * gp.tileSize;
+		i++;
+		
+		gp.obj[mapNumber][i] = new OBJ_RabbitDen(gp);
+		gp.obj[mapNumber][i].x = 13 * gp.tileSize;
+		gp.obj[mapNumber][i].y = 11 * gp.tileSize;
 	}
 }

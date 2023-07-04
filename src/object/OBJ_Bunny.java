@@ -4,13 +4,20 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import main.GamePanel;
+
 public class OBJ_Bunny extends SuperObject{
 
-	public OBJ_Bunny() {
+	GamePanel gp;
+	
+	public OBJ_Bunny(GamePanel gp) {
+		
+		this.gp = gp;
 		
 		name = "Bunny";
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/bunny.png"));
+			uTool.scaleImage(image, gp.tileSize, gp.tileSize);
 		}catch(IOException e) {
 			e.printStackTrace();
 		}

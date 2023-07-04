@@ -8,6 +8,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 
 import object.OBJ_Bunny;
 
@@ -22,6 +23,9 @@ public class UI {
 	int messageTime = 0;
 	public boolean gameFinished = false;
 	public int commandNum = 0;
+	
+	double playTime;
+	DecimalFormat decimalFormat = new DecimalFormat("0.00");
 	
 	
 	public UI(GamePanel gp) {
@@ -39,7 +43,7 @@ public class UI {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		OBJ_Bunny bunny = new OBJ_Bunny();
+		OBJ_Bunny bunny = new OBJ_Bunny(gp);
 		bunnyCountImage = bunny.image;
 		
 	}
@@ -80,24 +84,28 @@ public class UI {
 				//STOP THE GAME(gameThread)
 				gp.gameThread = null; 
 			}
-			// display Bunny collect count
-			else {
-				
+			else {				
+				// display Bunny and collect count
 				g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 30F));
-				g2.setColor(Color.white);
+				g2.setColor(Color.yellow);
 				g2.drawImage(bunnyCountImage, 30, 10, gp.tileSize, gp.tileSize, null);
 				g2.drawString("x" + gp.player.hasBunny, 70, 40); // Parameters: text, x, y
+				
+				//TIMER
+				playTime += (double)1/60;
+				g2.drawString("Time: " + decimalFormat.format(playTime), gp.tileSize*10, 40);
 				
 				// MESSAGE
 				if (messageOn == true) {
 					
 					g2.setFont(bauhaus93);
 					g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 30F));
+					g2.setColor(Color.white);
 					
 					String text = message;
 					int x = getXForCenteredText(text);
 					
-					g2.drawString(message, x, 500);
+					g2.drawString(message, x, 14 * gp.tileSize);
 					
 					messageTime++;
 					// 2 sec timer, then turns off message
@@ -110,6 +118,9 @@ public class UI {
 		}
 		if(gp.gameState == gp.pauseState) {
 			drawPauseScreen();
+		}
+		if(gp.gameState == gp.completionState) {
+			drawCompletionScreen();
 		}
 		
 	}
@@ -175,6 +186,54 @@ public class UI {
 		 
 		g2.drawString(text, x, y);	
 	}
+	
+	// screen render for completionState
+		public void drawCompletionScreen() {
+			if(gp.gameState == gp.completionState) {
+				
+				//Congratulations
+				g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 70F));
+				g2.setColor(Color.yellow);
+				
+				String text = "Congratulations!";
+				int x = getXForCenteredText(text);
+				int y = gp.screenHeight/2;;
+				
+				g2.drawString(text, x, y);
+				
+				//Completion Time
+				g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
+				g2.setColor(Color.white);
+				
+				text = "Completion time: " + decimalFormat.format(playTime);
+				y = gp.screenHeight/2 + gp.tileSize;;
+				
+				g2.drawString(text, x, y);
+				
+				messageTime++;
+				System.out.println(messageTime);
+				// 2 sec timer, then turns off message
+				if(messageTime > 360) {
+					messageTime = 0;
+					switch(gp.currentMap) {
+					case 0:
+						gp.playMusic(6);
+						gp.currentMap = 1;
+						gp.player.savedBunny = 2;
+						gp.player.setDefaultValues();
+						break;
+					case 1:
+						gp.playMusic(7);
+						gp.currentMap = 2;
+						gp.player.savedBunny = 3;
+						gp.player.setDefaultValues();
+						break;
+					}
+					gp.gameState = gp.playState;
+				}
+			}
+		}
+	
 	// method to get x coordinate of a text to center it on the screen
 	public int getXForCenteredText(String text) {
 		

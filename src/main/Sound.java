@@ -24,6 +24,10 @@ public class Sound {
 		soundURL[4] = getClass().getResource("/sound/powerup.wav");
 		// title screen cursor SE
 		soundURL[5] = getClass().getResource("/sound/speak.wav");
+		// Map 1 song
+		soundURL[6] = getClass().getResource("/sound/Merchant.wav");
+		// Map 2 song
+		soundURL[7] = getClass().getResource("/sound/Dungeon.wav");
 	}
 	//method to open audio files in java
 	public void setFile(int i) {

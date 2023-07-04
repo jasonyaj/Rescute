@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 public class Player extends Entity {
 
@@ -37,32 +38,52 @@ public class Player extends Entity {
 	}
 
 	public void setDefaultValues() {
-
-		// Set player's default position
-		x = 100;
-		y = 100;
 		speed = 4; // amount of pixel movement
 		direction = "down";
+
+		// Set player's default position
+		switch(gp.currentMap) {
+		case 0:
+			x = 4 * gp.tileSize;
+			y = 4 * gp.tileSize;
+			break;
+		case 1:
+			x = 13 * gp.tileSize;
+			y = 10 * gp.tileSize;
+			break;
+		case 2:
+			x = 13 * gp.tileSize;
+			y = 2 * gp.tileSize;
+			break;
+		}
 
 	}
 
 	public void getPlayerImage() {
 
+		up1 = setup("Tee_up_1");
+		up2 = setup("Tee_up_2");
+		down1 = setup("Tee_down_1");
+		down2 = setup("Tee_down_2");
+		left1 = setup("Tee_left_1");
+		left2 = setup("Tee_left_2");
+		right1 = setup("Tee_right_1");
+		right2 = setup("Tee_right_2");
+	}
+	
+	public BufferedImage setup(String imageFileName) {
+		
+		UtilityTool uTool = new UtilityTool();
+		BufferedImage image = null;
+		
 		try {
-
-			up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
-			up2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_2.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
-			down2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_2.png"));
-			left1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_1.png"));
-			left2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_2.png"));
-			right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
-			right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
-
-		} catch (IOException e) {
+			image = ImageIO.read(getClass().getResourceAsStream("/player/" + imageFileName + ".png"));
+			image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+			
+		}catch(IOException e) {
 			e.printStackTrace();
 		}
-
+		return image;
 	}
 
 	public void update() {
@@ -127,26 +148,33 @@ public class Player extends Entity {
 		
 		if(i != 1987) {
 			
-			String objectName = gp.obj[i].name;
+			String objectName = gp.obj[gp.currentMap][i].name;
 			
 			switch(objectName) {
 			case "Bunny":
 				gp.playSE(1);
 				hasBunny++;
-				gp.obj[i] = null; // this will delete the object when touched
-				gp.ui.showMessage("Hurry, save the bunny, drop it in the den.");
+				gp.obj[gp.currentMap][i] = null; // this will delete the object when touched
+				if(gp.currentMap == 0) {					
+					gp.ui.showMessage("Hurry, save the bunny, drop it in the den.");
+				}
 				break;
 			case "RabbitDen":
+				if(gp.currentMap == 2 && savedBunny == 0) {
+					gp.ui.gameFinished = true;								
+				}	
 				if(hasBunny > 0) {
 					while(hasBunny > 0) {
 						gp.playSE(3); // ----- FIX ME, so fast, can only here it once, FIX ME ----
 						hasBunny--;
 						savedBunny--;
 						if(savedBunny == 0) {
-							gp.ui.gameFinished = true;
 							gp.stopMusic();
 							gp.playSE(2);
-							
+							if(gp.currentMap == 2) {
+								gp.ui.gameFinished = true;
+							}
+							gp.gameState = gp.completionState;
 						}
 					}
 				}
@@ -201,7 +229,7 @@ public class Player extends Entity {
 			}
 			break;
 		}
-		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+		g2.drawImage(image, x, y, null);
 
 	}
 

@@ -21,12 +21,14 @@ public class GamePanel extends JPanel implements Runnable{
 	// SCREEN SETTINGS
 	final int orginalTileSize = 16; // 16x16 tile
 	final int scale = 3;
-	
 	public final int tileSize = orginalTileSize * scale; // 48x48 tile
 	public final int maxScreenCol = 16;
 	public final int maxScreenRow = 16;
 	public final int screenWidth = tileSize * maxScreenCol; // 768px
 	public final int screenHeight = tileSize * maxScreenRow; // 768px
+	//WORLD SETTINGS
+	public final int maxMap = 10; //map index, set to 10 for a max of 10 maps
+	public int currentMap = 0;
 	
 	// FPS
 	int FPS = 60; 
@@ -43,12 +45,13 @@ public class GamePanel extends JPanel implements Runnable{
 	Thread gameThread;
 	// ENTITY AND OBJECT
 	Player player = new Player(this, keyH);
-	public SuperObject obj[] = new SuperObject[10]; // can render 10 objects on the map at the same time
+	public SuperObject obj[][] = new SuperObject[maxMap][10]; // can render 10 objects on the map at the same time
 	// GAME STATE
 	public int gameState;
 	public final int titleState = 0;
 	public final int playState = 1;
 	public final int pauseState = 2;
+	public final int completionState = 3;
 	
 	
 	public GamePanel() {
@@ -78,7 +81,8 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 
 	// ----- GAME TIME LOOP & INTERVAL -----
-	// delta method for time loop
+	public void otherTimeLoopMethodsForTryingOut() {		
+		// delta method for time loop
 //	@Override
 //	public void run() {
 //		
@@ -116,7 +120,7 @@ public class GamePanel extends JPanel implements Runnable{
 //		}
 //		
 //	}
-	// Delta method from SimplePong for time loop
+		// Delta method from SimplePong for time loop
 //	@Override
 //	public void run() {
 //		this.requestFocus();
@@ -157,7 +161,9 @@ public class GamePanel extends JPanel implements Runnable{
 //		}
 //		
 //	}
-	// Sleep Method for time loop
+		// Sleep Method for time loop
+	}
+
 	@Override
 	public void run() {
 		
@@ -199,15 +205,22 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 		if(gameState == pauseState) {
 			// nothing
-		}		
+		}
+		if(gameState == completionState) {
+			// nothing
+		}
 	}
 	// REPAINT for gamethread
 	public void paintComponent(Graphics g) { // paintComponent is actually a built in method in Java to draw things in JPanel
-		
 		super.paintComponent(g);
-		
 		Graphics2D g2 = (Graphics2D)g;
-		// drawing works in layers, draw tiles first then player
+		// NOTE: drawing works in layers, draw tiles first then player
+		
+		//DEBUG start
+		long drawStart = 0;
+		if(keyH.checkDrawTime == true) {			
+			drawStart = System.nanoTime();
+		}
 		
 		// TITLE SCREEN
 		if(gameState == titleState) {
@@ -220,9 +233,9 @@ public class GamePanel extends JPanel implements Runnable{
 			tileM.draw(g2);
 			
 			// OBJECT
-			for(int i = 0; i < obj.length; i++) {
-				if(obj[i] != null) {
-					obj[i].draw(g2, this);
+			for(int i = 0; i < obj[1].length; i++) {
+				if(obj[currentMap][i] != null) {
+					obj[currentMap][i].draw(g2, this);
 				}
 			}
 			
@@ -231,9 +244,19 @@ public class GamePanel extends JPanel implements Runnable{
 			
 			//UI
 			ui.draw(g2);
+			
+			// DEBUG end
+			if(keyH.checkDrawTime == true) {							
+				long drawEnd = System.nanoTime();
+				long passed = drawEnd - drawStart;
+				g2.setColor(Color.white);;
+				g2.drawString("Draw Time: " + passed, 10, 400);
+				System.out.println("Draw Time: " + passed);
+			}
+			
+			g2.dispose();
 		}
 		
-		g2.dispose();
 		
 	}
 	// ----- music controller methods -----

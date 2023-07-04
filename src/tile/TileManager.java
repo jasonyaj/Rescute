@@ -9,12 +9,13 @@ import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.UtilityTool;
 
 public class TileManager {
 
 	GamePanel gp;
 	public Tile[] tile;
-	public int mapTileNum[][];
+	public int mapTileNum[][][];
 	
 
 	public TileManager(GamePanel gp) {
@@ -22,35 +23,37 @@ public class TileManager {
 		this.gp = gp;
 
 		tile = new Tile[10];
-		mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
+		mapTileNum = new int[gp.maxMap][gp.maxScreenCol][gp.maxScreenRow];
 
 		getTileImage();
-		loadMap("/maps/map01.txt");
+		loadMap("/maps/map01.txt", 0); // PARAMETERS: filepath, assign an index number
+		loadMap("/maps/map02.txt", 1);
+		loadMap("/maps/map03.txt", 2);
 	}
 
 	public void getTileImage() {
 
+			setup(0, "grass01", false);
+			setup(1, "tree", true);
+			setup(2, "water00", true);
+	}
+	public void setup(int index, String imageFileName, boolean collision) {
+		
+		UtilityTool uTool = new UtilityTool();
+		
 		try {
-
-			tile[0] = new Tile();
-			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass01.png"));
-			
-			tile[1] = new Tile();
-			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
-			tile[1].collision = true;
-
-			tile[2] = new Tile();
-			tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water00.png"));
-			tile[2].collision = true;
-			
-
-		} catch (IOException e) {
+			tile[index] = new Tile();
+			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + imageFileName + ".png"));
+			tile[index].image = uTool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
+			tile[index].collision = collision;
+		}catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	// Method to load created .txt map by grabbing number value
-	public void loadMap(String mapPath) {
+	public void loadMap(String mapPath, int mapNumber) {
 
 		try {
 			InputStream is = getClass().getResourceAsStream(mapPath);
@@ -70,7 +73,7 @@ public class TileManager {
 
 					int num = Integer.parseInt(numbers[col]);
 
-					mapTileNum[col][row] = num;
+					mapTileNum[mapNumber][col][row] = num;
 					col++;
 				}
 				if (col == gp.maxScreenCol) {
@@ -125,9 +128,9 @@ public class TileManager {
 
 		while (col < gp.maxScreenCol && row < gp.maxScreenRow) {
 
-			int tileNum = mapTileNum[col][row];
+			int tileNum = mapTileNum[gp.currentMap][col][row];
 
-			g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null);
+			g2.drawImage(tile[tileNum].image, x, y, null);
 			col++;
 			x += gp.tileSize;
 
