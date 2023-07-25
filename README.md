@@ -52,15 +52,11 @@ Rescute: Bunny Edition is a 2d maze game built using Java.
 
 <img width="384" alt="Congratulations" src="https://github.com/jasonyaj/Rescute/assets/124213154/5341223c-fa90-4517-8973-3c02117355d2">
 
-&nbsp;
-
 #### Rescued Bunny(s)
 
 - In every stage, the amount of rabbits rescued is displayed in the upper left hand corner of the window.
 
 <img width="174" alt="RescuedRabbits" src="https://github.com/jasonyaj/Rescute/assets/124213154/8edae809-a012-484d-b073-3f6ad63eb0be">
-
-&nbsp;
 
 #### Den
 
