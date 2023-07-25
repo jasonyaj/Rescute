@@ -2,8 +2,8 @@
 
 ## Table of Contents
 
-- <a href="https://github.com/jasonyaj/Rescute/edit/main/README.md#game-menu">Game Menu</a>
-- [Game Menu](https://github.com/jasonyaj/Rescute/edit/main/README.md#game-menu)
+- <a href="https://github.com/jasonyaj/Rescute#game-menu">Game Menu</a>
+- [Game Menu](https://github.com/jasonyaj/Rescute#game-menu)
 - <a href="https://github.com/jasonyaj/Rescute/edit/main/README.md#stage-1-tutorial">Stage 1</a>
 - <a href="https://github.com/jasonyaj/Rescute/blob/main/README.md#stage-2-wall-obstacle-added">Stage 2</a>
 - <a href="https://github.com/jasonyaj/Rescute/blob/main/README.md#stage-3-harder-difficulty">Stage 3</a>
