@@ -1,6 +1,8 @@
 <h1 align="center">Rescute</h1>
 
-<i>A 2D maze game</i>
+<p align="center">
+    <i>Bunny Edition</i>
+</p>
 
 ---
 
@@ -16,7 +18,7 @@
 
 ## Overview
 
-placeholder
+Rescute: Bunny Edition is a 2d maze game built using Java.
 
 ## Controls
 
@@ -59,7 +61,8 @@ placeholder
 <img width="174" alt="RescuedRabbits" src="https://github.com/jasonyaj/Rescute/assets/124213154/8edae809-a012-484d-b073-3f6ad63eb0be">
 
 &nbsp;
-Den
+
+#### Den
 
 - Touching the den not only rescues the current bunny(s) but also pops up a message of how many are left to be rescued. Touching the den without any bunny(s) will simply only display the "bunnies left to rescue" count.
 
