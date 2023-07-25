@@ -10,7 +10,8 @@
 
 ## Game Menu
 
-Game menu includes the options of starting a <i>New Game</i>. <i>Load Map</i> to load a specific map(coming soon), and <i>Quit</i> to exit out of the app.
+Game menu includes the options of starting a <i>New Game</i>. <i>Load Map</i>, to load a specific map(coming soon), and <i>Quit</i>, to exit out of the app.
+
 <img width="383" alt="Menu" src="https://github.com/jasonyaj/Rescute/assets/124213154/7a02ddfd-dc5e-4e96-ad08-3587e5ab9dc9">
 
 ## Stage 1: Tutorial
@@ -48,3 +49,5 @@ Rescued Bunny(s)
 Den
 
 - Touching the den not only rescues the current bunny(s) but also pops up a message of how many are left to be rescued. Touching the den without any bunny(s) will simply only display the "bunnies left to rescue" count.
+
+[Back to Table of Contents](https://github.com/jasonyaj/Rescute#table-of-contents)
