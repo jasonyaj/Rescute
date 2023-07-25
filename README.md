@@ -12,13 +12,13 @@
 
 Game menu includes the options of starting a <i>New Game</i>. <i>Load Map</i>, to load a specific map(coming soon), and <i>Quit</i>, to exit out of the app.
 
-<img width="383" alt="Menu" src="https://github.com/jasonyaj/Rescute/assets/124213154/7a02ddfd-dc5e-4e96-ad08-3587e5ab9dc9">
+<img width="384" alt="Menu" src="https://github.com/jasonyaj/Rescute/assets/124213154/7a02ddfd-dc5e-4e96-ad08-3587e5ab9dc9">
 
 ## Stage 1: Tutorial
 
 Stage 1 serves as a tutorial on how to play the game. Messages on the bottom half of the screen gives clues on what to do next.
 
-<img width="384" alt="Stage1" src="https://github.com/jasonyaj/Rescute/assets/124213154/491f5f71-8541-41c5-a9cd-395f784bac6d">
+<img width="384" alt="Stage1" src="https://github.com/jasonyaj/Rescute/assets/124213154/ad0049d1-c178-454b-b944-5fc52424f6bc">
 
 ## Stage 2: Wall Obstacle Added
 
@@ -45,9 +45,14 @@ Rescued Bunny(s)
 
 - In every stage, the amount of rabbits rescued is displayed in the upper left hand corner of the window.
 
+<img width="174" alt="RescuedRabbits" src="https://github.com/jasonyaj/Rescute/assets/124213154/8edae809-a012-484d-b073-3f6ad63eb0be">
+
+
 &nbsp;
 Den
 
 - Touching the den not only rescues the current bunny(s) but also pops up a message of how many are left to be rescued. Touching the den without any bunny(s) will simply only display the "bunnies left to rescue" count.
+
+<img width="384" alt="DenMessage" src="https://github.com/jasonyaj/Rescute/assets/124213154/391c7dfa-33d6-4c26-8c6a-b76369f7c78d">
 
 [Back to Table of Contents](https://github.com/jasonyaj/Rescute#table-of-contents)
