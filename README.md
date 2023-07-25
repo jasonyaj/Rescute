@@ -1,4 +1,11 @@
-# Rescute
+<h1 align="center">Rescute</h1>
+
+## Table of Contents
+- <a href="https://github.com/jasonyaj/Rescute/edit/main/README.md#game-menu">Game Menu</a>
+- Stage 1 https://github.com/jasonyaj/Rescute/edit/main/README.md#stage-1-tutorial
+- Stage 2
+- Stage 3
+- Features
 
 ## Game Menu
 
