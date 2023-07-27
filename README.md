@@ -1,8 +1,6 @@
 <h1 align="center">Rescute</h1>
 
-<p align="center">
-    <i>Bunny Edition</i>
-</p>
+<p align="center"><i>Bunny Edition</i></p>
 
 ---
 
@@ -89,4 +87,4 @@ A more complex maze and an additional bunny is added to be rescued.
 <img width="384" alt="Stage3" src="https://github.com/jasonyaj/Rescute/assets/124213154/44d94aa1-5033-40ea-8b07-bd738360177c">
 
 &nbsp;
-[Back to Table of Contents](https://github.com/jasonyaj/Rescute#table-of-contents)
+[Return to Table of Contents](https://github.com/jasonyaj/Rescute#table-of-contents)
